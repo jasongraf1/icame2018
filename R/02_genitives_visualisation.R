@@ -31,17 +31,22 @@ source("munge/02_split_data_by_genre.R")
 # Plot 1 ------------------------------------------------------------------
 
 # Bar plot of distribution of genitive variants by genre and time
+mytable <- gens[, c("Genre", "Time", "Type")] %>%
+  ftable()
+d <- as.data.frame(mytable)
+d$Prop <- as.data.frame(prop.table(mytable, 1))[, ncol(d)]
+d$pos <- rep(c(.95, .05), each = 10)
 
-ggBar.plot(gens, "Time", "Type", facet = "Genre",
-           opp.cols = T, facet.cols = 5, size = 5) +
-  # scale_fill_manual(name = "", values = brewer.pal(3, "PuBu")[-2]) +
-  theme_minimal() +
-  theme(legend.position = 'bottom',
-        strip.text = element_text(size =rel(1.25)),
-        axis.text.x = element_text(size = rel(1.75)),
-        legend.text = element_text(size = rel(1.5))) +
-  scale_fill_manual(name = "", values = c("#EFC000FF", "#0073C2FF"))
-
+ggplot(d, aes(Time, Prop)) +
+  geom_bar(aes(fill = Type),
+    stat = "identity", width = 0.7, color = "black") +
+  geom_text(aes(label = Freq, y = pos),
+    color = rep(rep(c("white", "black"), 5), each = 2), size = 4) +
+  scale_fill_jco() +
+  facet_grid(~ Genre) +
+  scale_y_continuous(breaks = seq(0, 1, 0.25),
+    labels = paste("%", seq(0, 100, 25), sep = "")) +
+  labs(x = "", y = "percentage of tokens")
 
 # Plot 2 ------------------------------------------------------------------
 
