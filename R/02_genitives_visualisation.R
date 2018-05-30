@@ -13,11 +13,9 @@ library(reshape2)
 
 library(ggsci) # for colors
 library(ggpubr)
+library(extrafont)
 theme_set(theme_minimal())
 theme_update(text = element_text(family = "Open Sans"))
-
-devtools::install_github("jasongraf1/JGggplot")
-library(JGggplot)
 
 
 # Setup -------------------------------------------------------------------
