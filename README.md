@@ -4,4 +4,4 @@ Code and data for Grafmiller, Jason. 2018. Variable cues vs. multiple grammars: 
 
 - **data/**: two tab-delimited .txt files for the written and spoken genitives
 - **munge/**: two `.R` files for loading and splitting the datasets
-- **R/**: two `.R` files for running the analysis with `brms` and generating the plots in the presentation
+- **R/**: three `.R` files for running the analysis with `brms`, generating the plots in the presentation, and running a preliminary MDS analysis
