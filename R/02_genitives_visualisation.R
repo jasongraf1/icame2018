@@ -14,6 +14,7 @@ library(reshape2)
 library(ggsci) # for colors
 library(ggpubr)
 library(extrafont)
+loadfonts()
 theme_set(theme_minimal())
 theme_update(text = element_text(family = "Open Sans"))
 
@@ -40,11 +41,12 @@ ggplot(d, aes(Time, Prop)) +
     stat = "identity", width = 0.7, color = "black") +
   geom_text(aes(label = Freq, y = pos),
     color = rep(rep(c("white", "black"), 5), each = 2), size = 4) +
-  scale_fill_jco() +
+  scale_fill_jco(name = "") +
   facet_grid(~ Genre) +
   scale_y_continuous(breaks = seq(0, 1, 0.25),
     labels = paste("%", seq(0, 100, 25), sep = "")) +
-  labs(x = "", y = "percentage of tokens")
+  labs(x = "", y = "percentage of tokens") +
+  theme(legend.position = "bottom")
 
 # Plot 2 ------------------------------------------------------------------
 
